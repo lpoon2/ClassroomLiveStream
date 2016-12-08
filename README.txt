@@ -25,10 +25,8 @@ If it seems as if VideoView is not connecting to the server, you can confirm tha
 We have analysed the rtsp streams published by the server with openRTSP, a command line tool that can be 
 used to verify the integrity of rtsp streams, and received successful play requests.
 If the libstreaming app fails to connect to the server, it is probably because the ANNOUNCE request was declined. 
-If this is the case, then it means the formats between the Android device and the server are incompatible. This is a fundamental problem, because it would require going deep into the very complex world of encodings and trying to figure 
-out where there are subtle differences in format between the Android Library's .h264 implementation and the server's 
-.h264 implementation. Ideally, this should never happen as .h264 and .aac were designed to be highly portable. 
-Again, you can verify that the server does at least successfully accept sources by streaming from any ffmpeg source with the command
+Such errors are likely due to subtle differences in format between Android's libstreaming's rtp and h264/aac implementation and node.js' rtp and h264/aac implementation.
+Again, you can verify that the server does successfully accept sources by streaming from any ffmpeg source with the command
 ffmpeg -re -i input.mp4 -c:v libx264 -preset fast -c:a libfdk_aac -ab 128k -ar 44100 -f rtsp rtsp://localhost:80/live/STREAM_NAME
 
 CODE DESCRIPTION
@@ -52,4 +50,10 @@ http.js
 mpegts.js
 rtp.js
 server.js
-These packages were sourced from 
+We rely on the packages aac.js, h264.js, mp4.js, rtp.js and avstreams.js to maintain representations of streams
+in the server and account for the representation of data that is written to and read from sockets in the body of
+RTP messages. The package sdp.js is used to parse and create messages in session description protocol while communicating between the server and client in the rtsp protocol. The packages bits.js and logger.js allow us to perform operations on individual bits and print debug/usage information to the console. Because of the event/callback-driven nature of node.js code, it is difficult to abstract away low level details, and therefore there are large gaps between comments explaining the intent of our code in rtsp.js, because those all involve the rigorous arithmetic of transporting data over RTP. The files that we modified for our use are server.js, stream_server.js, rtsp.js, and config.js, and these have been commented in crucial places to explain their purpose.
+In an RTSP implementation, the SETUP and TEARDOWN requests are necessary. SETUP is necessary before a PLAY request to notify the server of which port it will be receiving on, and the server usually confirms the chosen parameters and also tells the client which port it shall be streaming from.
+The ANNOUNCE request involves the client publishing a presentation description(sdp form of all media streams, i.e., providing data about the ports where the data will be served, the protocol used, etc). If all the formats provided are valid, the server can then take a RECORD request where the client specifies the uri it desires, and gets the timestamps from which it should play the received data.
+RTP streaming involves a sister protocol, RTCP, which provides complementary information about the packets lost in RTP streaming, the bitrate, etc. Both sender and receiver RTCP ports send statistics to each other throughout the duration of the stream, and this information can be used to synchronize the audio and video streams by using timestamps that start from the same date (Jan 1 1900). The end of a session is marked by the BYE message sent by RTCP ports.
+Conventionally the RTP ports are even numbered and RTCP ports are contiguous odd numbers. The default ports at which the server listens are specified in config.js.
