@@ -8,6 +8,8 @@ protocol.
 We can start the server with the command
 sudo node server.js
 
+The libstreaming app is in branch "Larry", it is called example 3.
+
 The server will then wait for either a client to connect to it, or a client to publish streams to it.(Sudo is not required if we set the port in config.js to above 1023).
 We publish streams from an android device using the libstreaming library. Libstreaming takes data from the Android Device's camera and converts it into .H264 and AAC formats for video and audio respectively, which should be recognized by the server.
 To stream to the server, set the url to
