@@ -6,7 +6,7 @@ protocol.
 
 QUICK RUN:
 We can start the server with the command
-sudo server.js
+sudo node server.js
 
 The server will then wait for either a client to connect to it, or a client to publish streams to it.(Sudo is not required if we set the port in config.js to above 1023).
 We publish streams from an android device using the libstreaming library. Libstreaming takes data from the Android Device's camera and converts it into .H264 and AAC formats for video and audio respectively, which should be recognized by the server.
@@ -61,4 +61,8 @@ Our RTSP clients are capable of using TCP instead of UDP if they choose to make 
 
 VIDEOVIEW
 
-The VideoView app is a very simple
+The VideoView app uses Android's videoView to stream the uri specified in the function. The uri must be changed to the rtsp uri of the server in the format rtsp://server:port/(file or live)/(name of stream)
+
+Libstreaming
+
+The libstreaming app creates an RTSPClient that can send audio and video streams to a server. Again, if we specify the uri correctly, the data is delivered and other streaming clients can have the stream forwarded to them by the server.
