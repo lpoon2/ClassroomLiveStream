@@ -30,3 +30,26 @@ out where there are subtle differences in format between the Android Library's .
 .h264 implementation. Ideally, this should never happen as .h264 and .aac were designed to be highly portable. 
 Again, you can verify that the server does at least successfully accept sources by streaming from any ffmpeg source with the command
 ffmpeg -re -i input.mp4 -c:v libx264 -preset fast -c:a libfdk_aac -ab 128k -ar 44100 -f rtsp rtsp://localhost:80/live/STREAM_NAME
+
+CODE DESCRIPTION
+
+NODE RTSP/HTTP SERVER
+
+Our node RTSP/HTTP server relies on several packages:
+aac.js
+codec_utils.js
+logger.js
+rtsp.js
+stream_server.js
+avstreams.js
+config.js
+h264.js
+mp4.js
+sdp.js
+bits.js
+event_emitter.js
+http.js
+mpegts.js
+rtp.js
+server.js
+These packages were sourced from 
