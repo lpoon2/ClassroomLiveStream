@@ -22,7 +22,7 @@
 
   DIRECTORY_INDEX_FILENAME = 'index.html';
 
-  DEFAULT_SERVER_NAME = 'node-rtsp-rtmp-server';
+  DEFAULT_SERVER_NAME = 'node-rtsp-server';
 
   GZIP_SIZE_THRESHOLD = 300;
 

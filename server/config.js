@@ -7,7 +7,7 @@
 
     /* Basic configurations */
     serverPort: 80,
-    serverName: 'node-rtsp-rtmp-server',
+    serverName: 'node-rtsp-server',
     videoFrameRate: 30,
     videoBitrateKbps: 2000,
     audioBitrateKbps: 40,

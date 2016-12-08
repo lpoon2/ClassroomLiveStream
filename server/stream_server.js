@@ -32,7 +32,7 @@
 
   DEBUG_INCOMING_PACKET_HASH = false;
 
-  DEFAULT_SERVER_NAME = "node-rtsp-rtmp-server/";
+  DEFAULT_SERVER_NAME = "node-rtsp-server/";
 
   serverName = (ref = config.serverName) != null ? ref : DEFAULT_SERVER_NAME;
 

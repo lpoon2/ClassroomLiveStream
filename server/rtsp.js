@@ -44,7 +44,7 @@
 
   TAG = enabledFeatures.join('/');
 
-  DEFAULT_SERVER_NAME = 'node-rtsp-rtmp-server';
+  DEFAULT_SERVER_NAME = 'node-rtsp-server';
 
   ENABLE_START_PLAYING_FROM_KEYFRAME = false;
 
