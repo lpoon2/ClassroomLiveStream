@@ -1,4 +1,4 @@
-CLASSROOM LIVE STREAMING
+# CLASSROOM LIVE STREAMING
 
 OBJECTIVES:
 In our project, we aimed to stream video between Android devices through the use of an intermediate server that used the RTSP
@@ -17,7 +17,9 @@ We use Android's VideoView to receive the streamed file. In the attached file, b
 Alternatively, if you want to test receiving the streamed file independently of a live source, any .mp4 file in the file/ directory will be available at the url rtsp://localhost:80/file/filename (e.x. rtsp://192.168.1.1:80/file/test.mp4).
 
 POSSIBLE HICCUPS:
-Sometimes Android's VideoView displays a black screen and does not play back the video. In this case, the file can still be played back on VLC media player on an Android device (or on any type of device). 
+Sometimes Android's VideoView displays a black screen and does not play back the video. 
+This is usually because of a firewall that blocks UDP packets.
+In this case, the file can still be played back on VLC media player on an Android device (or on any type of device). 
 We are certain that play back works with VLC files, because even when the VLC media player does not successfully get the rtsp connection (usually because of a firewall on the ports that the server would like to stream to), it then proceeds to establish an rtsp connection over http, which is supported by our server, and performs quite well. 
 If it seems as if VideoView is not connecting to the server, you can confirm that the server still works by attempting to connect with the offical VLC app on Android/ VLC media player on any device (we would be happy to demonstrate this to you in person).
 We have analysed the rtsp streams published by the server with openRTSP, a command line tool that can be 
