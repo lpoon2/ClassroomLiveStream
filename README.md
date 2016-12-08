@@ -27,12 +27,16 @@ Alternatively, if you want to test receiving the streamed file independently of 
 Sometimes Android's VideoView displays a black screen and does not play back the video. 
 This is usually because of a firewall that blocks UDP packets.
 In this case, the file can still be played back on VLC media player on an Android device (or on any type of device). 
-We are certain that play back works with VLC files, because even when the VLC media player does not successfully get the rtsp connection (usually because of a firewall on the ports that the server would like to stream to), it then proceeds to establish an rtsp connection over http, which is supported by our server, and performs quite well. 
+We are certain that play back works with VLC files, because even when the VLC media player does not successfully get the rtsp connection (usually because of a firewall on the ports that the server would like to stream to), it then proceeds to establish an rtsp connection over http, which is supported by our server, and performs quite well.
+
 If it seems as if VideoView is not connecting to the server, you can confirm that the server still works by attempting to connect with the offical VLC app on Android/ VLC media player on any device (we would be happy to demonstrate this to you in person).
+
 We have analysed the rtsp streams published by the server with openRTSP, a command line tool that can be 
 used to verify the integrity of rtsp streams, and received successful play requests.
+
 If the libstreaming app fails to connect to the server, it is probably because the ANNOUNCE request was declined. 
 Such errors are likely due to subtle differences in format between libstreaming's rtp and h264/aac implementation and node.js' rtp and h264/aac implementation. Nevertheless, libstreaming is presently the best way to stream data to a server from the device
+
 However, you can verify that the server does successfully accept sources by streaming from any ffmpeg source (or openRTSP) with the command
 ffmpeg -re -i input.mp4 -c:v libx264 -preset fast -c:a libfdk_aac -ab 128k -ar 44100 -f rtsp rtsp://localhost:80/live/STREAM_NAME
 
