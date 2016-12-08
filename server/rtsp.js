@@ -2060,7 +2060,8 @@
 
     //If the client object has been initialized correctly by a successful announce request,
     //then the server triggers the events associated with video_start and audio_start, which
-    //we saw updates the streams in real time.
+    //we saw reset the Framerate and start the video/audio instantly (calling functions
+    // onReceiveVideoControlBuffer, onReceiveAudioControlBuffer in stream_server.js).
     RTSPServer.prototype.respondRecord = function(socket, req, callback) {
       var client, res, stream, streamId;
       client = this.clients[socket.clientID];
